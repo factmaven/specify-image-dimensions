@@ -1,4 +1,7 @@
 ## Changelog 
+### 1.0.2 08/25/16
+* **Fix**: Thumbnails weren't showing in the *Media* library (thanks [ramonjosegn](https://wordpress.org/support/topic/bug-in-last-udpate))
+
 ### 1.0.1 08/24/16 
 * **Fix**: image dimensions were not being set
 

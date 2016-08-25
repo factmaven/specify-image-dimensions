@@ -3,7 +3,7 @@
     Plugin Name: Specify Image Dimensions
     Plugin URI: https://wordpress.org/plugins/specify-image-dimensions/
     Description: Automatically specify image dimensions that are missing width and/or height attributes. Helps with website speed tools.
-    Version: 1.0.1
+    Version: 1.0.2
     Author: <a href="https://www.factmaven.com/">Fact Maven</a>
     License: GPLv3
 */
@@ -17,9 +17,13 @@ function factmaven_sid_buffer() { // Enable output buffering for our function
 }
 
 function factmaven_sid_specify_image_dimensions( $content ) { // Automatically insert width and height attributes
+    global $pagenow;
+    if ( $pagenow == 'upload.php' ) { // Don't apply changes on the Media page
+        return $content;
+    }
+
     preg_match_all( '/<img[^>]+>/i', $content, $images );
-    
-    if (count( $images ) < 1) {
+    if ( count( $images ) < 1 ) { // Don't change content if there are no images
         return $content;
     }
 

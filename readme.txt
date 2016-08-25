@@ -1,9 +1,9 @@
 === Specify Image Dimensions ===
 Contributors: factmaven, ethanosullivan, nateallen
-Tags: image, img, dimensions, width, height, specify image dimensions
+Tags: specify image dimensions, image, img, dimensions, width, height
 Requires at least: 4.5
 Tested up to: 4.6
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,12 +59,20 @@ That's easy! If you have a GitHub account, you're more than welcome to share you
 1. Before and after result using the Specify Image Dimensions plugin from GTmetrix report.
 
 == Changelog ==
+=1.0.2 08/25/16 =
+* **Fix**: Thumbnails weren't showing in the *Media* library (thanks [ramonjosegn](https://wordpress.org/support/topic/bug-in-last-udpate))
+
 = 1.0.1 08/24/16 =
-* **Fix**: image dimensions were not being set
+* **Fix**: Image dimensions were not being set
 
 = 1.0.0 08/21/16 =
 * Initial release, huzzah!
 
 == Upgrade Notice ==
+= 1.0.2 =
+**Problem**: Image thumbnails in Media gallery were not showing
+**Solution**: Added exception to not apply changes on the Media page
+
 = 1.0.1 =
-Fixed issue where the plugin wasn't inserting the images. Enabling output buffering (`ob_start`) has solved the issue.
+**Problem**: Both width/height attributes weren't being inserted for some websites.
+**Solution**: Enabled output buffering (`ob_start`) and hook the `plugins_loaded` tag instead.
