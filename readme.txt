@@ -3,7 +3,7 @@ Contributors: factmaven, ethanosullivan, nateallen
 Tags: image, img, dimensions, width, height, specify image dimensions
 Requires at least: 4.5
 Tested up to: 4.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,9 +43,11 @@ We're always looking for suggestions to improve our plugin!
 1. Activate the plugin through the `Plugins` menu in WordPress.
 1. Let it settle in a for a minute and be amazed.
 
+If there are any issues or questions, head over to our [FAQ](https://wordpress.org/plugins/specify-image-dimensions/faq) or our [Support](https://wordpress.org/support/plugin/specify-image-dimensions) page.
+
 == Frequently Asked Questions ==
 = How does it work? =
-The plugin will scan the contents in 
+The plugin will scan the contents in your posts and [*automagically*](http://www.dictionary.com/browse/automagically) specify the image dimensions by adding the correct `width` and `height`.
 
 = Why is this important? =
 Specifying a `width` and `height` for all images allows for faster rendering by eliminating the need for unnecessary re-flows and repaints. This is particularly helpful with website speed tools such as <a href="https://gtmetrix.com">GTmetrix</a> and <a href="https://developers.google.com/speed/pagespeed/">Google's PageSpeed</a>. More information can be found [here](https://developers.google.com/speed/pagespeed/module/filter-image-optimize#resize-image-dimensions).
@@ -54,8 +56,15 @@ Specifying a `width` and `height` for all images allows for faster rendering by 
 That's easy! If you have a GitHub account, you're more than welcome to share your contribution to our plugin which can be found [here](https://github.com/factmaven/specify-image-dimensions).
 
 == Screenshots ==
-1. Example result from GTmetrix which affects page score
+1. Before and after result using the Specify Image Dimensions plugin from GTmetrix report.
 
 == Changelog ==
+= 1.0.1 08/24/16 =
+* **Fix**: image dimensions were not being set
+
 = 1.0.0 08/21/16 =
 * Initial release, huzzah!
+
+== Upgrade Notice ==
+= 1.0.1 =
+Fixed issue where the plugin wasn't inserting the images. Enabling output buffering (`ob_start`) has solved the issue.
