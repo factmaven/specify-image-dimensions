@@ -59,7 +59,7 @@ That's easy! If you have a GitHub account, you're more than welcome to share you
 1. Before and after result using the Specify Image Dimensions plugin from GTmetrix report.
 
 == Changelog ==
-=1.0.2 08/25/16 =
+= 1.0.2 08/25/16 =
 * **Fix**: Thumbnails weren't showing in the *Media* library (thanks [ramonjosegn](https://wordpress.org/support/topic/bug-in-last-udpate))
 
 = 1.0.1 08/24/16 =
