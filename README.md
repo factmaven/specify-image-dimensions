@@ -1,19 +1,15 @@
-# Specify Image Dimensions 
-Automatically specify image dimensions that are missing width and/or height attributes. Helps with website speed tools.
+Automatically specify image dimensions that are missing width and/or height attributes. Helps with website speed tools such as [GTmetrix](https://gtmetrix.com).
 
-## Description 
+## Description
 A simple and lightweight plugin that scans your website and automatically sets the appropriate image dimensions that are missing a `width` and/or `height` attributes in your `<img>` tags.
 
 For example, here are some images with no dimensions set:
-
 ```html
 <img src="http://link.to/some/img1.jpg" id="123" alt="Some Alt" />
 <img class="some-class" src="http://link.to/some/img2.jpg" alt="Another Alt" />
 <img class="another-class" src="http://link.to/some/img2.jpg" width="500" />
 ```
-
 The plugin will get the actual image dimension and insert the width and height:
-
 ```html
 <img src="http://link.to/some/img1.jpg" alt="Some Alt" id="123" width="500" height="350" />
 <img src="http://link.to/some/img1.jpg" alt="Another Alt" class="some-class" width="500" height="350" />
@@ -21,7 +17,7 @@ The plugin will get the actual image dimension and insert the width and height:
 ```
 
 ### Why is this important? 
-Specifying a `width` and `height` for all images allows for faster rendering by eliminating the need for unnecessary re-flows and repaints. This is particularly helpful with website speed tools such as <a href="https://gtmetrix.com">GTmetrix</a> and <a href="https://developers.google.com/speed/pagespeed/">Google's PageSpeed</a>.
+Specifying a `width` and `height` for all images allows for faster rendering by eliminating the need for unnecessary re-flows and repaints. This is particularly helpful with website speed tools such as [GTmetrix](https://gtmetrix.com) and [Google's PageSpeed](https://developers.google.com/speed/pagespeed).
 
 > **More details from Google**
 >
@@ -41,7 +37,4 @@ If there are any issues or questions, head over to our [FAQ](https://wordpress.o
 The plugin will scan the contents in your posts and [*automagically*](http://www.dictionary.com/browse/automagically) specify the image dimensions by adding the correct `width` and `height`.
 
 ### Why is this important? 
-Specifying a `width` and `height` for all images allows for faster rendering by eliminating the need for unnecessary re-flows and repaints. This is particularly helpful with website speed tools such as <a href="https://gtmetrix.com">GTmetrix</a> and <a href="https://developers.google.com/speed/pagespeed/">Google's PageSpeed</a>. More information can be found [here](https://developers.google.com/speed/pagespeed/module/filter-image-optimize#resize-image-dimensions).
-
-### I'd like to contribute to this plugin and help improve it 
-That's easy! If you have a GitHub account, you're more than welcome to share your contribution to our plugin which can be found [here](https://github.com/factmaven/specify-image-dimensions).
+Specifying a `width` and `height` for all images allows for faster rendering by eliminating the need for unnecessary re-flows and repaints. This is particularly helpful with website speed tools such as [GTmetrix](https://gtmetrix.com) and [Google's PageSpeed](https://developers.google.com/speed/pagespeed). More information can be found [here](https://developers.google.com/speed/pagespeed/module/filter-image-optimize#resize-image-dimensions).
