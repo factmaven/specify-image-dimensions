@@ -2,41 +2,32 @@
 Contributors: factmaven, ethanosullivan, nateallen
 Tags: specify image dimensions, image, img, dimensions, width, height, gtmetrix, yslow, pagespeed, page speed, optimization, performance
 Requires at least: 1.5.1
-Tested up to: 4.6
-Stable tag: 1.0.3
+Tested up to: 4.6.1
+Stable tag: 1.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Automatically specify image dimensions that are missing width and/or height attributes. Helps with website speed tools such as GTmetrix.
+Automatically specify image dimensions that are missing width and/or height attributes. Helps load faster and better ranking on website speed tools such as GTmetrix.
 
 == Description ==
-A simple and lightweight plugin that scans your website and automatically sets the appropriate image dimensions that are missing a `width` and/or `height` attributes in your `<img>` tags.
+> **Specify Image Dimensions** is a plugin that scans and inserts missing `width` and `height` in all `<img>` tags. Specifying the dimension allows for faster rendering by eliminating the need for unnecessary re-flows and repaints. This is particularly helpful with website speed tools such as [GTmetrix](https://gtmetrix.com) and [Google's PageSpeed](https://developers.google.com/speed/pagespeed).
 
-For example, here are some images with no dimensions set:
+= Before =
 `
-<img src="http://link.to/some/img1.jpg" id="123" alt="Some Alt" />
-<img class="some-class" src="http://link.to/some/img2.jpg" alt="Another Alt" />
-<img class="another-class" src="http://link.to/some/img2.jpg" width="500" />
+<img src="http://example.com/some/image.jpg" title="Some Title" />
+<img src="http://example.com/some/vector.svg" class="svg" />
+<img src="http://example.com/some/another-vector.webp" />
 `
-The plugin will get the actual image dimension and insert the width and height:
-`
-<img src="http://link.to/some/img1.jpg" alt="Some Alt" id="123" width="500" height="350" />
-<img src="http://link.to/some/img1.jpg" alt="Another Alt" class="some-class" width="500" height="350" />
-<img src="http://link.to/some/img1.jpg" class="another-class" width="500" height="350" />
-`
-= Why is this important? =
-Specifying a `width` and `height` for all images allows for faster rendering by eliminating the need for unnecessary re-flows and repaints. This is particularly helpful with website speed tools such as [GTmetrix](https://gtmetrix.com) and [Google's PageSpeed](https://developers.google.com/speed/pagespeed).
 
-> **More details from Google**
->
-> When the browser lays out the page, it needs to be able to flow around replaceable elements such as images. It can begin to render a page even before images are downloaded, provided that it knows the dimensions to wrap non-replaceable elements around. If no dimensions are specified in the containing document, or if the dimensions specified don't match those of the actual images, the browser will require a reflow and repaint once the images are downloaded. To prevent reflows, specify the width and height of all images, either in the HTML <img> tag, or in CSS.
->
-> **Reference**: [GTmetrix](https://gtmetrix.com/specify-image-dimensions.html)
+= After =
+`
+<img src="http://example.com/some/image.jpg" title"Some Title" width="100" height="25" />
+<img src="http://example.com/some/vector.svg" class="svg" width="100%" height="auto" />
+<img src="http://example.com/some/another-vector.webp" width="100%" height="auto" />
+`
 
 = Contribute on GitHub =
-[View this plugin on GitHub](https://github.com/factmaven/specify-image-dimensions)
-
-We're always looking for suggestions to improve our plugin!
+Want to help improve this plugin? Head over to our [GitHub page](https://github.com/factmaven/specify-image-dimensions)
 
 == Installation ==
 1. Upload the plugin to the `/wp-content/plugins/` directory.
@@ -59,28 +50,34 @@ That's easy! If you have a GitHub account, you're more than welcome to share you
 1. Before and after result using the Specify Image Dimensions plugin from GTmetrix report.
 
 == Changelog ==
-= 1.0.3 (09/01/16) =
+=1.0.4 =
+*2016-11-28*
+* **Fix**: SVG and webP images were given `0` width and height
+* Various code improvements
+
+= 1.0.3 =
+* *2016-09-01*
 * **Fix**: Thumbnail weren't showing up in *Pages*
 * Renamed plugin file from `index.php` to `specify-image-dimensions.php`
 
-= 1.0.2 (08/25/16) =
+= 1.0.2 =
+* *2016-08-25*
 * **Fix**: Thumbnails weren't showing in the *Media* library (thanks [ramonjosegn](https://wordpress.org/support/topic/bug-in-last-udpate))
 
-= 1.0.1 (08/24/16) =
+= 1.0.1 =
+* *2016-08-24*
 * **Fix**: Image dimensions were not being set
 
-= 1.0.0 (08/21/16) =
+= 1.0.0 =
+* *2016-08-21*
 * Initial release, huzzah!
 
 == Upgrade Notice ==
-= 1.0.2 =
-**Problem**: Image thumbnails in Pages were not showing
-**Solution**: Added exception to not apply changes anywhere in the `wp-admin`
+= 1.0.4 =
+Fixed issue with SVG and webP images set to "0" for width and height
 
 = 1.0.2 =
-**Problem**: Image thumbnails in Media gallery were not showing
-**Solution**: Added exception to not apply changes on the Media page
+Image thumbnails in Media gallery were not showing
 
 = 1.0.1 =
-**Problem**: Both width/height attributes weren't being inserted for some websites.
-**Solution**: Enabled output buffering (`ob_start`) and hook the `plugins_loaded` tag instead.
+Both width/height attributes weren't being inserted for some websites.
