@@ -3,7 +3,7 @@
  * Plugin Name: Specify Image Dimensions
  * Plugin URI: https://wordpress.org/plugins/specify-image-dimensions/
  * Description: Automatically specify image dimensions that are missing width and/or height attributes. Helps with website speed tools.
- * Version: 1.0.4
+ * Version: 1.1.0
  * Author: Fact Maven
  * Author URI: https://www.factmaven.com
  * License: GPLv3
@@ -12,7 +12,7 @@
 # If accessed directly, exit
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Fact_Maven_SID {
+class Fact_Maven_Specify_Image_Dimensions {
 
     public function __construct() {
         # Specify image dimensions
@@ -26,7 +26,7 @@ class Fact_Maven_SID {
             if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
                 return $content;
             }
-
+            # Find all image tags
             preg_match_all( '/<img[^>]+>/i', $content, $images );
             # If there are no images, return
             if ( count( $images ) < 1 ) {
@@ -34,34 +34,41 @@ class Fact_Maven_SID {
             }
 
             foreach ( $images[0] as $image ) {
-                preg_match_all( '/(src|alt|title|class|id|width|height)=("[^"]*")/i', $image, $img );
+                # Match all image attributes
+                $attributes = 'src|srcset|longdesc|alt|class|id|usemap|align|border|hspace|vspace|crossorigin|ismap|sizes|width|height';
+                preg_match_all( '/(' . $attributes . ')=("[^"]*")/i', $image, $img );
                 # If image has a 'src', continue
                 if ( ! in_array( 'src', $img[1] ) ) {
                     continue;
                 }
-                # If no 'width' or 'height' is available, calculate dimensions
-                if ( ! in_array( 'width', $img[1] ) || ! in_array( 'height', $img[1] ) ) {
+                # If no 'width' or 'height' is available or blank, calculate dimensions
+                if ( ! in_array( 'width', $img[1] ) || ! in_array( 'height', $img[1] ) || ( in_array( 'width', $img[1] ) && in_array( '""', $img[2] ) ) || ( in_array( 'height', $img[1] ) && in_array( '""', $img[2] ) ) ) {
+                    # Split up string of attributes into variables
+                    $attributes = explode( '|', $attributes );
+                    foreach ( $attributes as $variable ) {
+                        ${$variable} = in_array( $variable, $img[1] ) ? ' ' . $variable . '=' . $img[2][array_search( $variable, $img[1] )] : '';
+                    }
                     $src = $img[2][array_search( 'src', $img[1] )];
-                    $alt = in_array( 'alt', $img[1] ) ? 'alt=' . $img[2][array_search( 'alt', $img[1] )] : '';
-                    $title = in_array( 'title', $img[1] ) ? 'title=' . $img[2][array_search( 'title', $img[1] )] : '';
-                    $class = in_array( 'class', $img[1] ) ? 'class=' . $img[2][array_search( 'class', $img[1] )] : '';
-                    $id = in_array( 'id', $img[1] ) ? 'id=' . $img[2][array_search( 'id', $img[1] )] : '';
+                    # If image is an SVG/WebP with no dimensions, set specific dimensions
                     if ( preg_match( '/(.*).svg|.webp/i', $src ) ) {
-                        $width = '100%';
-                        $height = 'auto';
+                        if ( ! in_array( 'width', $img[1] ) || ! in_array( 'height', $img[1] ) || ( in_array( 'width', $img[1] ) && in_array( '""', $img[2] ) ) || ( in_array( 'height', $img[1] ) && in_array( '""', $img[2] ) ) ) {
+                            $width = '100%';
+                            $height = 'auto';
+                        }
                     }
+                    # Else, get accurate width and height attributes
                     else {
-                        list( $width, $height, $type, $attr ) = getimagesize( str_replace( "\"", "" , $src ) );
+                        list( $width, $height ) = getimagesize( str_replace( "\"", "" , $src ) );
                     }
-
-                    $image_tag = sprintf( '<img src=%s %s %s %s %s width="%s" height="%s" />', $src, $alt, $title, $class, $id, $width, $height );
-                    $content = str_replace( $image, $image_tag, $content );
+                    # Recreate the image tag with dimensions set
+                    $tag = sprintf( '<img src=%s%s%s%s%s%s%s%s%s%s%s%s%s%s width="%s" height="%s">', $src, $srcset, $longdesc, $alt, $class, $id, $usemap, $align, $border, $hspace, $vspace, $crossorigin, $ismap, $sizes, $width, $height );
+                    $content = str_replace( $image, $tag, $content );
                 }
             }
-            # Return all image with dimensions set
+            # Return all image with dimensions
             return $content;
         } );
     }
 }
 # Instantiate the class
-new Fact_Maven_SID();
+new Fact_Maven_Specify_Image_Dimensions();

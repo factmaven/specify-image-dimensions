@@ -1,4 +1,9 @@
 ## Changelog
+### 1.1.0
+*2016-01-29*
+* **Fix**: images with blank dimensions weren't being detected
+* Added support for additional [`img` attributes](http://www.w3schools.com/tags/tag_img.asp)
+
 ### 1.0.4
 *2016-11-28*
 * **Fix**: SVG and webP images were given `0` width and height

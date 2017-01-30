@@ -1,9 +1,9 @@
 === Specify Image Dimensions ===
 Contributors: factmaven, ethanosullivan, nateallen
-Tags: specify image dimensions, image, img, dimensions, width, height, gtmetrix, yslow, pagespeed, page speed, optimization, performance
+Tags: dimensions, gtmetrix, height, image, img, optimization, page speed, pagespeed, performance, specify image dimensions, width, yslow
 Requires at least: 1.5.1
-Tested up to: 4.6.1
-Stable tag: 1.0.4
+Tested up to: 4.7.2
+Stable tag: 1.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,16 +14,16 @@ Automatically specify image dimensions that are missing width and/or height attr
 
 = Before =
 `
-<img src="http://example.com/some/image.jpg" title="Some Title" />
-<img src="http://example.com/some/vector.svg" class="svg" />
-<img src="http://example.com/some/another-vector.webp" />
+<img src="http://example.com/image.jpg" title="Some Title" />
+<img src="http://example.com/vector.svg" class="svg" />
+<img src="http://example.com/another-vector.webp" />
 `
 
 = After =
 `
-<img src="http://example.com/some/image.jpg" title"Some Title" width="100" height="25" />
-<img src="http://example.com/some/vector.svg" class="svg" width="100%" height="auto" />
-<img src="http://example.com/some/another-vector.webp" width="100%" height="auto" />
+<img src="http://example.com/image.jpg" title"Some Title" width="100" height="25" />
+<img src="http://example.com/vector.svg" class="svg" width="100%" height="auto" />
+<img src="http://example.com/another-vector.webp" width="100%" height="auto" />
 `
 
 = Contribute on GitHub =
@@ -50,6 +50,11 @@ That's easy! If you have a GitHub account, you're more than welcome to share you
 1. Before and after result using the Specify Image Dimensions plugin from GTmetrix report.
 
 == Changelog ==
+= 1.1.0 =
+*2016-01-29*
+* **Fix**: images with blank dimensions weren't being detected
+* Added support for additional [`img` attributes](http://www.w3schools.com/tags/tag_img.asp)
+
 =1.0.4 =
 *2016-11-28*
 * **Fix**: SVG and webP images were given `0` width and height
